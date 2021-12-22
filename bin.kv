@@ -1,0 +1,203 @@
+from collections import defaultdict
+#create default dict and default color
+default_color = [0/255, 200/255, 0/255, 1]
+color_dict_by_day = defaultdict(lambda: default_color)
+
+#add other colors by key as "num"
+
+color_dict_by_day["2"] = [200/255, 200/255, 0/255, 1]
+color_dict_by_day["3"] = [200/255, 0/255, 0/255, 1]
+# and so on....
+
+#for last call your code block as:
+
+MDCard:
+    size_hint: None, None
+    size: 232.5, 23
+    orientation: "vertical"
+    pos: 352.5, 255 + 23/2
+    md_bg_color: color_dict_by_day[app.weekday]
+
+
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 115, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 1"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 210, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 2"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 305, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 3"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 400, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 4"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 495, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 5"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 590, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 6"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 685, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 7"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 780, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 8"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 90,40
+                orientation: "vertical"
+                pos: 875, 450
+                md_bg_color: 58/255, 123/255, 236/255, 1
+                MDLabel:
+                    text: "[size=17]Tiết 9"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            
+            #Thứ - card (background)
+            MDCard:
+                id: mon_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 390
+                md_bg_color: 0, 0, 0, 0.02
+            MDCard:
+                id: tue_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 340
+                md_bg_color: 0, 0, 0, 0.02
+            MDCard:
+                id: wed_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 290
+                md_bg_color: 0, 0, 0, 0.02
+            MDCard:
+                id: thu_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 240
+                md_bg_color: 0, 0, 0, 0.02
+            MDCard:
+                id: fri_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 190
+                md_bg_color: 0, 0, 0, 0.02
+            MDCard:
+                id: sat_background
+                border_radius: 10
+                radius: [5]
+                size_hint: None, None
+                size: 960, 46
+                orientation: "vertical"
+                pos: 20, 140
+                md_bg_color: 0, 0, 0, 0.02
