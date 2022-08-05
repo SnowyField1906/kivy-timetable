@@ -1,0 +1,784 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import Clipboard kivy.core.clipboard.Clipboard
+#:import Snackbar kivymd.uix.snackbar.Snackbar
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import randint random.randint
+
+<TooltipMDIconButton@MDIconButton+MDTooltip>
+
+<AVCard>:
+    id: av
+    canvas.before:
+        Color:
+            rgba: 66/255, 165/255, 244/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    orientation: "vertical"
+    
+    MDCard:
+        radius: [30]
+        size_hint: None, None
+        size: 1090, 650
+        orientation: "vertical"
+        elevation: 25
+        md_bg_color: 240/255, 240/255, 250/255, 1
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        Screen:
+            FitImage:
+                source: app.bgimage
+                halign: 'center'
+                radius: [30, 30, 30, 30]
+            MDCard:
+                radius: [30]
+                size_hint: None, None
+                size: 1090, 650
+                md_bg_color: app.fcs_card_bg[app.mode]
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            UpdateVariables:
+                timelablepr: timelabel
+                currentpr: current
+                nextpr: next
+
+                # mon_cardpr: mon_card
+                # tue_cardpr: tue_card
+                # wed_cardpr: wed_card
+                # thu_cardpr: thu_card
+                # fri_cardpr: fri_card
+                # sat_cardpr: sat_card
+
+                # t1_cardpr: t1_card
+                # t2_cardpr: t2_card
+                # t3_cardpr: t3_card
+                # t4_cardpr: t4_card
+                # t5_cardpr: t5_card
+                # t6_cardpr: t6_card
+                # t7_cardpr: t7_card
+                # t8_cardpr: t8_card
+                # t9_cardpr: t9_card
+                # t10_cardpr: t10_card
+
+                mon_avpr: mon_av
+                mon_cntt_ltpr: mon_cntt_lt
+                mon_cntt_thpr: mon_cntt_th
+                mon_lt_ltpr: mon_lt_lt
+                mon_lt_thpr: mon_lt_th
+                mon_tdpr: mon_td
+                mon_trr_ltpr: mon_trr_lt
+                mon_trr_thpr: mon_trr_th
+                mon_vtp_ltpr: mon_vtp_lt
+                mon_vtp_thpr: mon_vtp_th
+            MDLabel:
+                id: timelabel
+                text:''
+                markup: True
+                font_name: 'BarlowCondensed-SemiBold'
+                theme_text_color:  "Custom"
+                text_color: app.blue[app.mode]
+                pos: 20, -298
+            MDCard:
+                id: currentcard
+                radius: [5]
+                size_hint: None, None
+                size: 300, 70
+                orientation: "vertical"
+                pos: 10, 515
+                md_bg_color: app.dft_card_bg[app.mode]
+
+                MDLabel:
+                    id: current
+                    text: ''
+                    markup: True
+                    halign: 'center'
+                    font_size: 19
+                    font_name: 'BarlowCondensed-Medium'
+                    theme_text_color:  "Custom"
+                    text_color: app.blue[app.mode]
+            MDCard:
+                id: nextcard
+                radius: [5]
+                size_hint: None, None
+                size: 300, 70
+                orientation: "vertical"
+                pos: 10, 440
+                md_bg_color: app.dft_card_bg[app.mode]
+                MDLabel:
+                    id: next
+                    text: ''
+                    markup: True
+                    halign: 'center'
+                    font_size: 19
+                    font_name: 'BarlowCondensed-Medium'
+                    theme_text_color:  "Custom"
+                    text_color: app.blue[app.mode]
+
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 300, 145
+                orientation: "vertical"
+                pos: 780, 440
+                md_bg_color: app.dft_card_bg[app.mode]
+                
+            MDTextField:
+                hint_text: 'Ghi chú'
+                mode: 'fill'
+                radius: [5, 5, 5, 5]
+                pos: 780, 440
+                color_mode: 'custom'
+                text_color_normal: app.blue[app.mode]
+                text_color_focus: app.blue[app.mode]
+                hint_text_color_normal: app.blue[app.mode]
+                hint_text_color_focus: app.blue[app.mode]
+                fill_color: 0, 0, 0, 0
+                size_hint_x: 300/1090
+                size_hint_y: 137/650
+                max_height: 137
+                multiline: True
+
+            MDRoundFlatIconButton:
+                icon: "image"
+                text: "[b][size=12]Đổi hình nền"
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                icon_color: app.blue[app.mode]
+                line_color: app.blue[app.mode]
+                line_width: .9
+                pos: 717, 605
+            MDRoundFlatIconButton:
+                icon: "palette"
+                text: "[b][size=12]Đổi theme"
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                icon_color: app.blue[app.mode]
+                line_color: app.blue[app.mode]
+                line_width: .9
+                pos: 850, 605
+                on_release:
+                    root.add_card()
+            MDRoundFlatIconButton:
+                icon: "pencil"
+                text: "[b][size=12]Chỉnh sửa"
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                icon_color: app.blue[app.mode]
+                line_color: app.blue[app.mode]
+                line_width: .9
+                pos: 970, 605
+                
+            MDLabel:
+                text: '[size=70][b]THỜI KHÓA BIỂU'
+                markup: True
+                theme_text_color:  "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-Bold'
+                pos: 350, 235
+            MDLabel:
+                text: '[size=30][b]Lớp: 21CTT5'
+                markup: True
+                theme_text_color:  "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-SemiBold'
+                pos: 480, 170
+            MDLabel:
+                text: '[size=25][b]Sinh viên: Nguyễn Hữu Thuận'
+                markup: True
+                theme_text_color:  "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-SemiBold'
+                pos: 415, 130
+            MDSeparator:
+                color: app.blue[app.mode]
+                pos: 320, 492
+                width: 150
+                height: 3
+                size_hint: None, None
+            MDSeparator:
+                color: app.blue[app.mode]
+                pos: 617, 492
+                width: 150
+                height: 3
+                size_hint: None, None
+            MDLabel:
+                text: '[size=20]Trường Đại học Khoa học Tự nhiên, Đại học Quốc gia TP. Hồ Chí Minh'
+                markup: True
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-SemiBold'
+                pos: 20, 300
+            MDTextButton:
+                text: '[size=18]Website trường: [u]https://www.hcmus.edu.vn'
+                markup: True
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-SemiBold'
+                pos: 420, 17
+                on_release:
+                    import webbrowser
+                    webbrowser.open('https://www.hcmus.edu.vn')
+            MDTextButton:
+                text: '[size=18]Website khoa: [u]https://www.fit.hcmus.edu.vn'
+                markup: True
+                theme_text_color: "Custom"
+                text_color: app.blue[app.mode]
+                font_name: 'BarlowCondensed-SemiBold'
+                pos: 775, 17
+                on_release:
+                    import webbrowser
+                    webbrowser.open('https://www.fit.hcmus.edu.vn')
+
+
+            #Tiết - card + label
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 115, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 1"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 210, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 2"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 305, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 3"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 400, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 4"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 495, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 5"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 590, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 6"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 685, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 7"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 780, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 8"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 875, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 9"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
+                radius: [5]
+                size_hint: None, None
+                size: 90,46
+                orientation: "vertical"
+                pos: 970, 365
+                md_bg_color: app.blue[app.mode]
+                MDLabel:
+                    text: "[size=17][b]Tiết 10"
+                    markup: True
+                    halign: 'center'
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+            
+            #weekday - card (background)
+            MDCard:
+                id: mon_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 305
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "1" else app.dft_thu_bg[app.mode]
+            Image:
+                source: 'images/red_border.png' if app.weekday == "1" else 'images/non_image.png'
+                pos: 0, 4
+            MDCard:
+                id: tue_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 255
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "2" else app.dft_thu_bg[app.mode]
+            Image:
+                source: 'images/red_border.png' if app.weekday == "2" else 'images/non_image.png'
+                pos: 0, -46
+            MDCard:
+                id: wed_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 205
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "3" else app.dft_thu_bg[app.mode]
+            Image:
+                source: 'images/red_border.png' if app.weekday == "3" else 'images/non_image.png'
+                pos: 0, -96.5
+            MDCard:
+                id: thu_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 155
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "4" else app.dft_thu_bg[app.mode]
+            Image:
+                source: 'images/red_border.png' if app.weekday == "4" else 'images/non_image.png'
+                pos: 0, -146
+            MDCard:
+                id: fri_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 105
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "5" else app.dft_thu_bg[app.mode]
+            Image:
+                source: 'images/red_border.png' if app.weekday == "5" else 'images/non_image.png'
+                pos: 0, -196
+            MDCard:
+                id: sat_background
+                radius: [5]
+                size_hint: None, None
+                size: 965, 46
+                orientation: "vertical"
+                pos: 105, 55
+                md_bg_color: app.dft_thu_bg_on[app.mode] if app.weekday == "6" else app.dft_thu_bg[app.mode]
+
+            Image:
+                source: 'images/red_border.png' if app.weekday == "6" else 'images/non_image.png'
+                pos: 0, -246
+
+            #weekday - card + label
+            MDCard:
+                id: mon_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 305
+                md_bg_color: app.red if app.weekday == "1"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 2"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: tue_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 255
+                md_bg_color: app.red if app.weekday == "2"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 3"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: wed_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 205
+                md_bg_color: app.red if app.weekday == "3"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 4"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: thu_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 155
+                md_bg_color: app.red if app.weekday == "4"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 5"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: fri_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 105
+                md_bg_color: app.red if app.weekday == "5"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 6"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: sat_card
+                radius: [5]
+                size_hint: None, None
+                size: 85-4, 46
+                orientation: "vertical"
+                pos: 20, 55
+                md_bg_color: app.red if app.weekday == "6"  else app.blue[app.mode]
+                MDLabel:
+                    text: "[size=20][b]Thứ 7"
+                    markup: True
+                    theme_text_color:  "Custom"
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+
+            #Môn - card:
+            MDCard:
+                id: mon_av
+                radius: [5]
+                size_hint: None, None
+                size: 375, 23
+                orientation: "vertical"
+                pos: 590, 305 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Anh văn 1"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_cntt_lt
+                radius: [5]
+                size_hint: None, None
+                size: 375, 23
+                orientation: "vertical"
+                pos: 115, 55 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Lí thuyết Nhập môn CNTT"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_cntt_th
+                radius: [5]
+                size_hint: None, None
+                size: 190 + 95/2, 23
+                orientation: "vertical"
+                pos: 590, 155 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Thực hành Nhập môn CNTT"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_lt_lt
+                radius: [5]
+                size_hint: None, None
+                size: 375, 23
+                orientation: "vertical"
+                pos: 115, 105 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Lí thuyết Nhập môn lập trình"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_lt_th
+                radius: [5]
+                size_hint: None, None
+                size: 190 + 95/2, 23
+                orientation: "vertical"
+                pos: 590, 205 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Thực hành Nhập môn lập trình"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_td
+                radius: [5]
+                size_hint: None, None
+                size: 185, 23
+                orientation: "vertical"
+                pos: 780, 105 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Thể dục 1"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_trr_lt
+                radius: [5]
+                size_hint: None, None
+                size: 375, 23
+                orientation: "vertical"
+                pos: 115, 205 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Lí thuyết Toán rời rạc"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_trr_th
+                radius: [5]
+                size_hint: None, None
+                size: 232.5, 23
+                orientation: "vertical"
+                pos: 352.5, 255 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Thực hành Toán rời rạc"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            MDCard:
+                id: mon_vtp_lt
+                radius: [5]
+                size_hint: None, None
+                size: 375, 23
+                orientation: "vertical"
+                pos: 115, 155 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Lí thuyết Vi tích phân 1B"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+
+            MDCard:
+                id: mon_vtp_th
+                radius: [5]
+                size_hint: None, None
+                size: 232.5, 23
+                orientation: "vertical"
+                pos: 115, 255 + 23/2
+                md_bg_color: 
+                MDLabel:
+                    text: "[size=14][b]Thực hành Vi tích phân 1B"
+                    markup: True
+                    theme_text_color: 'Custom'
+                    text_color: 1, 1, 1, 1
+                    halign: 'center'
+            #Card
+            MDCard:
+                border_radius: 35
+                radius: [30]
+                size_hint: None, None
+                size: 1090, 650
+                orientation: "vertical"
+                elevation: 25
+                md_bg_color: 0, 0, 0, .3
+                pos_hint: {"center_x": .5, "center_y": .5}
+            MDCard:
+                radius: [30]
+                line_color: (0.2, 0.2, 0.2, 0.8)
+                style: 'outlined'
+                size_hint: None, None
+                size: 400, 400
+                orientation: "vertical"
+                elevation: 25
+                md_bg_color: 240/255, 240/255, 250/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5}
+                Screen:
+                    MDCard:
+                        radius: [30, 30, 0, 0]
+                        size_hint: None, None
+                        size: 400, 55
+                        orientation: "vertical"
+                        md_bg_color: app.blue[app.mode]
+                        pos_hint_x: None
+                        pos: 0, 345
+                        MDLabel:
+                            text: "[size=30][b] Anh Văn 1"
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            halign: 'center'
+                    MDIconButton:
+                        icon: "close-circle"
+                        theme_text_color: "Custom"
+                        text_color: app.red
+                        user_font_size: 35
+                        pos: 343, 345
+                        on_release:
+                            root.manager.current = 'home'
+                            app.root.transition = FadeTransition(duration=0.2)
+
+                    MDLabel:
+                        text: "[size=19][b]Giáo viên: [/b]Nguyễn Trà My"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos_hint_x: None
+                        pos: 35, 110
+                    MDSeparator:
+                        color: 58/255, 123/255, 236/255, .5
+                        pos: 25, 240
+                        width: 350
+                        height: 2
+                        size_hint: None, None
+                    MDLabel:
+                        text: "[size=18][b]Thông tin phòng học"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos: 120, 10
+                    MDLabel:
+                        text: "[size=18][b]Zoom ID: [/b]    926 7236 6790"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos_hint_x: None
+                        pos: 70, -25
+                    TooltipMDIconButton:
+                        icon: "clipboard-multiple"
+                        tooltip_text: "Sao chép"
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        user_font_size: 22
+                        pos: 298, 155
+                        on_release:
+                            self.text = Clipboard.paste()
+                            Clipboard.copy('926-7236-6790')
+                            Snackbar(text="[b]Đã sao chép vào bộ nhớ tạm!", icon='check-bold', snackbar_x="20dp", snackbar_y="20dp",
+                            size_hint_x=.3, bg_color=app.blue["bright"], duration=1).open()
+                    MDLabel:
+                        text: "[size=18][b]Password: [/b] 375903"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos_hint_x: None
+                        pos: 70, -50
+                    TooltipMDIconButton:
+                        icon: "clipboard-multiple"
+                        tooltip_text: "Sao chép"
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        user_font_size: 22
+                        pos: 240, 130
+                        on_release:
+                            self.text = Clipboard.paste()
+                            Clipboard.copy('375903')
+                            Snackbar(text="[b]Đã sao chép vào bộ nhớ tạm!", snackbar_x="20dp", snackbar_y="20dp",
+                            size_hint_x=.3, bg_color=app.blue["bright"], duration=1).open()
+                    MDSeparator:
+                        color: 58/255, 123/255, 236/255, .5
+                        pos: 100, 120
+                        width: 200
+                        height: 2
+                        size_hint: None, None
+                    MDLabel:
+                        text: "[size=18][b]Tham gia bằng link Zoom"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos: 99, -110
+                    MDTextButton:
+                        text: "[u][size=15]https://zoom.us/j/92672366790?pwd=V0wwZmtue\nWNLUnVLMUtzamVQQklOdz09"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: app.blue[app.mode]
+                        pos: 33, 30
+                        on_release:
+                            import webbrowser
+                            webbrowser.open('https://zoom.us/j/92672366790?pwd=V0wwZmtueWNLUnVLMUtzamVQQklOdz09')

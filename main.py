@@ -20,17 +20,17 @@ Window.top = 165/2
 Window.left = 385/2
 
 
-Builder.load_file('av.kv')
-Builder.load_file('cntt(lt).kv')
-Builder.load_file('cntt(th).kv')
-Builder.load_file('home.kv')
-Builder.load_file('lt(lt).kv')
-Builder.load_file('lt(th).kv')
-Builder.load_file('td.kv')
-Builder.load_file('trr(lt).kv')
-Builder.load_file('trr(th).kv')
-Builder.load_file('vtp(lt).kv')
-Builder.load_file('vtp(th).kv')
+Builder.load_file('screens/av.kv')
+Builder.load_file('screens/cntt(lt).kv')
+Builder.load_file('screens/cntt(th).kv')
+Builder.load_file('screens/home.kv')
+Builder.load_file('screens/lt(lt).kv')
+Builder.load_file('screens/lt(th).kv')
+Builder.load_file('screens/td.kv')
+Builder.load_file('screens/trr(lt).kv')
+Builder.load_file('screens/trr(th).kv')
+Builder.load_file('screens/vtp(lt).kv')
+Builder.load_file('screens/vtp(th).kv')
 
 
 class ColorCard(Screen):
@@ -127,6 +127,7 @@ class UpdateVariables(Screen):
     tiet8_5 = tiet8+25
     tiet9 = tiet8+50
     tiet10 = tiet9+60
+    print(tiet9)
 
     print(tiet6, " , " ,tiet8_5)
 
@@ -353,7 +354,7 @@ class UpdateVariables(Screen):
 
 
 class ScreenApp(MDApp):
-    bgimage = 'home_background' + str(randint(5, 7)) + '.jpg'
+    bgimage = 'images/home_background' + str(randint(1, 9)) + '.jpg'
 
     red = [200/255, 0/255, 0/255, 1]
     fcs_red = [170/255, 0/255, 0/255, 1]
